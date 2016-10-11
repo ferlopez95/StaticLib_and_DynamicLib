@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+#include <windows.h>
+
+#define DllExport _declspec(dllexport)
+
+DllExport void extremelyLargeString(){
+
+    //Initialize the size of the array
+    char * cArrLetter = malloc(sizeof(char));
+    //Puts the end mark in the array
+    cArrLetter[0] = '\0';
+
+    char cLit;
+    int i = 0;
+
+    //Gets the letters and makes memory bigger
+    while( (cLit = getch()) != '.'){
+        printf("%c", cLit);
+        cArrLetter = realloc(cArrLetter, (i+2)*sizeof(char));
+        cArrLetter[i++] = cLit;
+        cArrLetter[i] = '\0';
+    }
+
+    printf("\nYour string is as it follows\n%s\n", cArrLetter);
+    //Free the space of memory
+    free(cArrLetter);
+}
